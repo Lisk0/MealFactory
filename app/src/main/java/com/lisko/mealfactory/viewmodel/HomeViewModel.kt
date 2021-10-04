@@ -1,4 +1,4 @@
-package com.lisko.mealfactory.ui.home
+package com.lisko.mealfactory.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
