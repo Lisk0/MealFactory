@@ -10,9 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MealFactory">
         <activity
-            android:name=".view.activities.AddUpdateMeal"
+            android:name=".view.activities.AddUpdateMealActivity"
             android:label="Add meal"
             android:theme="@style/Theme.MealFactory.NoActionBar"
+            android:configChanges="orientation"
             android:exported="true" />
         <activity
             android:name=".view.activities.SplashActivity"

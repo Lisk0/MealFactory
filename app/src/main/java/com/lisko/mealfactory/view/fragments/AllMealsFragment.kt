@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.lisko.mealfactory.R
 import com.lisko.mealfactory.databinding.FragmentAllMealsBinding
-import com.lisko.mealfactory.view.activities.AddUpdateMeal
+import com.lisko.mealfactory.view.activities.AddUpdateMealActivity
 import com.lisko.mealfactory.viewmodel.HomeViewModel
 
 class AllMealsFragment : Fragment() {
@@ -57,7 +57,7 @@ class AllMealsFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId){
             R.id.action_add_meal ->{
-                startActivity(Intent(requireActivity(),AddUpdateMeal::class.java))
+                startActivity(Intent(requireActivity(),AddUpdateMealActivity::class.java))
                 return true
             }
         }
