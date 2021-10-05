@@ -12,4 +12,7 @@
     <string name="lb_direction">Direction to cook</string>
     <string name="cd_meal_image">Image of meal</string>
     <string name="cd_add_meal_button">Add meal button</string>
+    <string name="dialog_selectImage">Select an image</string>
+    <string name="dialog_camera">Camera</string>
+    <string name="dialog_gallery">Gallery</string>
 </resources>

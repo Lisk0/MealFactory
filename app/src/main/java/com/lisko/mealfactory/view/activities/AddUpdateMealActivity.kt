@@ -1,11 +1,27 @@
 package com.lisko.mealfactory.view.activities
 
+import android.Manifest
+import android.app.AlertDialog
+import android.app.Dialog
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings
 import android.widget.Toast
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionDeniedResponse
+import com.karumi.dexter.listener.PermissionGrantedResponse
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import com.karumi.dexter.listener.single.PermissionListener
 import com.lisko.mealfactory.R
 import com.lisko.mealfactory.databinding.ActivityAddUpdateMealBinding
+import com.lisko.mealfactory.databinding.DialogSelectImageBinding
+import java.lang.Exception
 
 class AddUpdateMealActivity : AppCompatActivity() {
     private lateinit var mealBinding: ActivityAddUpdateMealBinding
@@ -18,7 +34,7 @@ class AddUpdateMealActivity : AppCompatActivity() {
         setupActionBar()
 
         mealBinding.ivAddPhoto.setOnClickListener {
-            Toast.makeText(this, "Select image clicked", Toast.LENGTH_SHORT).show()
+            launchDialog()
         }
     }
 
@@ -28,6 +44,84 @@ class AddUpdateMealActivity : AppCompatActivity() {
         mealBinding.toolbar.setNavigationOnClickListener {
             onBackPressed()
         }
+    }
+
+    private fun launchDialog(){
+        val custom= Dialog(this)
+        val binding: DialogSelectImageBinding = DialogSelectImageBinding.inflate(layoutInflater)
+        custom.setContentView(binding.root)
+        custom.setTitle(R.string.dialog_selectImage)
+        custom.show()
+        binding.ivDialogCamera.setOnClickListener{
+            //Toast.makeText(this,"Camera clicked", Toast.LENGTH_SHORT).show()
+            Dexter.withContext(this).withPermissions(
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA
+            ).withListener(object : MultiplePermissionsListener{
+                override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
+                    if(report!!.areAllPermissionsGranted()){
+                        Toast.makeText(this@AddUpdateMealActivity,"Camera permission enabled", Toast.LENGTH_SHORT).show()
+                    }
+                    else{
+                        showAlertDialogPermissions()
+                    }
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    permissions: MutableList<PermissionRequest>?,
+                    token: PermissionToken?
+                ) {
+                    showAlertDialogPermissions()
+                }
+
+            }).onSameThread().check()
+
+            custom.dismiss()
+        }
+
+        binding.ivDialogGallery.setOnClickListener {
+            Dexter.withContext(this@AddUpdateMealActivity).withPermission(Manifest.permission.READ_EXTERNAL_STORAGE).withListener(
+                object: PermissionListener{
+                    override fun onPermissionGranted(p0: PermissionGrantedResponse?) {
+                        //
+                    }
+
+                    override fun onPermissionDenied(p0: PermissionDeniedResponse?) {
+                        Toast.makeText(this@AddUpdateMealActivity, "Read permission denied",
+                            Toast.LENGTH_SHORT).show()
+                    }
+
+                    override fun onPermissionRationaleShouldBeShown(
+                        p0: PermissionRequest?,
+                        p1: PermissionToken?
+                    ) {
+                        showAlertDialogPermissions()
+                    }
+
+                }).onSameThread().check()
+
+            custom.dismiss()
+        }
+
+    }
+
+    private fun showAlertDialogPermissions(){
+        AlertDialog.Builder(this).setMessage("Permissions denied\n"+
+        "You can change them in settings").setPositiveButton("Go to settings"){
+            _, _ ->
+            try {
+                val intent= Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                val uri= Uri.fromParts("package", packageName, null)
+                intent.data=uri
+                startActivity(intent)
+            }catch (e: Exception){
+                e.printStackTrace()
+            }
+        }.setNegativeButton("Cancel"){
+            dialog, _ ->
+                dialog.dismiss()
+        }.show()
     }
 
 }
