@@ -16,4 +16,5 @@
     <color name="secondaryDarkColor">#001064</color>
     <color name="primaryTextColor">#ffffff</color>
     <color name="secondaryTextColor">#ffffff</color>
+    <color name="divider_line_color">#e0e0e0</color>
 </resources>
