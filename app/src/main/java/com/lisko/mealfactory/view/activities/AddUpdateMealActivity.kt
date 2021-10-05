@@ -14,6 +14,7 @@ import android.provider.Settings
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.bumptech.glide.Glide
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
@@ -120,18 +121,23 @@ class AddUpdateMealActivity : AppCompatActivity() {
             if(requestCode== CAMERA){
                 data?.let {
                     val thumbnail: Bitmap= data.extras!!.get("data") as Bitmap
-                    mealBinding.ivMealImage.setImageBitmap(thumbnail)
-                    mealBinding.ivAddPhoto.setImageDrawable(ContextCompat.getDrawable(this,
-                    R.drawable.ic_edit))
+                    //mealBinding.ivMealImage.setImageBitmap(thumbnail)
+                    Glide.with(this)
+                        .load(thumbnail).centerCrop().into(mealBinding.ivMealImage)
+                    //mealBinding.ivAddPhoto.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_edit))
+                    Glide.with(this).load(R.drawable.ic_edit).into(mealBinding.ivAddPhoto)
                 }
 
             }
             if(requestCode== GALLERY){
                 data?.let{
                     val photoUri= data.data
-                    mealBinding.ivMealImage.setImageURI(photoUri)
-                    mealBinding.ivAddPhoto.setImageDrawable(ContextCompat.getDrawable(this,
-                        R.drawable.ic_edit))
+                    //mealBinding.ivMealImage.setImageURI(photoUri)
+                    //mealBinding.ivAddPhoto.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_edit))
+
+                    Glide.with(this)
+                        .load(photoUri).centerCrop().into(mealBinding.ivMealImage)
+                    Glide.with(this).load(R.drawable.ic_edit).into(mealBinding.ivAddPhoto)
                 }
             }
         }
