@@ -91,7 +91,8 @@ class AddUpdateMealActivity : AppCompatActivity() {
             Dexter.withContext(this@AddUpdateMealActivity).withPermission(Manifest.permission.READ_EXTERNAL_STORAGE).withListener(
                 object: PermissionListener{
                     override fun onPermissionGranted(p0: PermissionGrantedResponse?) {
-                        //
+                        val intent= Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                        startActivityForResult(intent, GALLERY)
                     }
 
                     override fun onPermissionDenied(p0: PermissionDeniedResponse?) {
@@ -123,6 +124,15 @@ class AddUpdateMealActivity : AppCompatActivity() {
                     mealBinding.ivAddPhoto.setImageDrawable(ContextCompat.getDrawable(this,
                     R.drawable.ic_edit))
                 }
+
+            }
+            if(requestCode== GALLERY){
+                data?.let{
+                    val photoUri= data.data
+                    mealBinding.ivMealImage.setImageURI(photoUri)
+                    mealBinding.ivAddPhoto.setImageDrawable(ContextCompat.getDrawable(this,
+                        R.drawable.ic_edit))
+                }
             }
         }
     }
@@ -146,5 +156,6 @@ class AddUpdateMealActivity : AppCompatActivity() {
     }
     companion object{
         private const val CAMERA=1
+        private const val GALLERY=2
     }
 }
