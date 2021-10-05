@@ -1,14 +1,18 @@
 package com.lisko.mealfactory.view.activities
 
 import android.Manifest
+import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.provider.Settings
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
@@ -56,12 +60,15 @@ class AddUpdateMealActivity : AppCompatActivity() {
             //Toast.makeText(this,"Camera clicked", Toast.LENGTH_SHORT).show()
             Dexter.withContext(this).withPermissions(
                 Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+             //   Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.CAMERA
             ).withListener(object : MultiplePermissionsListener{
                 override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
                     if(report!!.areAllPermissionsGranted()){
-                        Toast.makeText(this@AddUpdateMealActivity,"Camera permission enabled", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(this@AddUpdateMealActivity,"Camera permission enabled", Toast.LENGTH_SHORT).show()
+                        val intent= Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                        startActivityForResult(intent, CAMERA)
+
                     }
                     else{
                         showAlertDialogPermissions()
@@ -106,6 +113,20 @@ class AddUpdateMealActivity : AppCompatActivity() {
 
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode== Activity.RESULT_OK){
+            if(requestCode== CAMERA){
+                data?.let {
+                    val thumbnail: Bitmap= data.extras!!.get("data") as Bitmap
+                    mealBinding.ivMealImage.setImageBitmap(thumbnail)
+                    mealBinding.ivAddPhoto.setImageDrawable(ContextCompat.getDrawable(this,
+                    R.drawable.ic_edit))
+                }
+            }
+        }
+    }
+
     private fun showAlertDialogPermissions(){
         AlertDialog.Builder(this).setMessage("Permissions denied\n"+
         "You can change them in settings").setPositiveButton("Go to settings"){
@@ -123,5 +144,7 @@ class AddUpdateMealActivity : AppCompatActivity() {
                 dialog.dismiss()
         }.show()
     }
-
+    companion object{
+        private const val CAMERA=1
+    }
 }

@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/L/AndroidStudioProjects/MealFactory/app/src/main/res/drawable/ic_add_photo.xml" value="0.2911458333333333" />
         <entry key="..\:/Users/L/AndroidStudioProjects/MealFactory/app/src/main/res/drawable/ic_camera.xml" value="0.2911458333333333" />
+        <entry key="..\:/Users/L/AndroidStudioProjects/MealFactory/app/src/main/res/drawable/ic_edit.xml" value="0.2911458333333333" />
         <entry key="..\:/Users/L/AndroidStudioProjects/MealFactory/app/src/main/res/drawable/ic_gallery.xml" value="0.2911458333333333" />
         <entry key="..\:/Users/L/AndroidStudioProjects/MealFactory/app/src/main/res/layout/activity_add_update_dish.xml" value="0.2554347826086957" />
         <entry key="..\:/Users/L/AndroidStudioProjects/MealFactory/app/src/main/res/layout/activity_add_update_meal.xml" value="0.16556291390728478" />
