@@ -157,5 +157,6 @@ class AddUpdateMealActivity : AppCompatActivity() {
     companion object{
         private const val CAMERA=1
         private const val GALLERY=2
+
     }
 }
