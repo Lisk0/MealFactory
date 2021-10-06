@@ -19,4 +19,11 @@
     <string name="rv_mealcategory">Select meal category</string>
     <string name="rv_mealtype">Select meal type</string>
     <string name="rv_mealtime">Select cooking time</string>
+    <string name="err_image">Please select or create meal image </string>
+    <string name="err_title">Please write a title for your meal </string>
+    <string name="err_type">Please select meal type </string>
+    <string name="err_category">Please select meal category </string>
+    <string name="err_ingredients">Please write ingredients for your meal </string>
+    <string name="err_time">Please select cooking time </string>
+    <string name="err_steps">Please write meal preparation steps </string>
 </resources>

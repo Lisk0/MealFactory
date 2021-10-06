@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.Settings
+import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -80,8 +81,42 @@ class AddUpdateMealActivity : AppCompatActivity() {
                 Constants.mealCookTime(), Constants.MEAL_COOKING_TIME)
         }
 
+        mealBinding.btAddMeal.setOnClickListener{
+            validateEntries()
+        }
+
     }
 
+    private fun validateEntries() {
+        if(TextUtils.isEmpty(mImagePath)){
+            Toast.makeText(this@AddUpdateMealActivity,
+            resources.getString(R.string.err_image), Toast.LENGTH_SHORT).show()
+
+        }else if(mealBinding.etTitle.text!!.isEmpty()){
+            Toast.makeText(this@AddUpdateMealActivity,
+                resources.getString(R.string.err_title), Toast.LENGTH_SHORT).show()
+
+        }else if(mealBinding.etType.text!!.isEmpty()){
+            Toast.makeText(this@AddUpdateMealActivity,
+                resources.getString(R.string.err_type), Toast.LENGTH_SHORT).show()
+
+        }else if(mealBinding.etCategory.text!!.isEmpty()){
+            Toast.makeText(this@AddUpdateMealActivity,
+                resources.getString(R.string.err_category), Toast.LENGTH_SHORT).show()
+
+        }else if(mealBinding.etIngredients.text!!.isEmpty()){
+            Toast.makeText(this@AddUpdateMealActivity,
+                resources.getString(R.string.err_ingredients), Toast.LENGTH_SHORT).show()
+
+        }else if(mealBinding.etTime.text!!.isEmpty()){
+            Toast.makeText(this@AddUpdateMealActivity,
+                resources.getString(R.string.err_time), Toast.LENGTH_SHORT).show()
+
+        }else if(mealBinding.etSteps.text!!.isEmpty()){
+            Toast.makeText(this@AddUpdateMealActivity,
+                resources.getString(R.string.err_steps), Toast.LENGTH_SHORT).show()
+        }
+    }
 
 
     private fun setupActionBar() {
