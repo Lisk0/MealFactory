@@ -262,6 +262,23 @@ class AddUpdateMealActivity : AppCompatActivity() {
         mCustomDialog.show()
     }
 
+    fun selectedItem(item: String, selection: String){
+        when(selection){
+            Constants.MEAL_TYPE ->{
+                mCustomDialog.dismiss()
+                mealBinding.etType.setText(item)
+            }
+            Constants.MEAL_COOKING_TIME ->{
+                mCustomDialog.dismiss()
+                mealBinding.etTime.setText(item)
+            }
+            Constants.MEAL_CATEGORY ->{
+                mCustomDialog.dismiss()
+                mealBinding.etCategory.setText(item)
+            }
+        }
+    }
+
     companion object{
         private const val CAMERA=1
         private const val GALLERY=2

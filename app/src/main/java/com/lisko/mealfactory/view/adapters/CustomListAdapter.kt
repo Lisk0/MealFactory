@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.lisko.mealfactory.databinding.ItemCustomListBinding
+import com.lisko.mealfactory.view.activities.AddUpdateMealActivity
 
 class CustomListAdapter(private val activity: Activity,
                         private val listItems: List<String>,
@@ -24,6 +25,12 @@ class CustomListAdapter(private val activity: Activity,
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item= listItems[position]
         holder.tvText.text= item
+
+        holder.itemView.setOnClickListener {
+            if(activity is AddUpdateMealActivity){
+                activity.selectedItem(item, selection)
+            }
+        }
 
     }
 
