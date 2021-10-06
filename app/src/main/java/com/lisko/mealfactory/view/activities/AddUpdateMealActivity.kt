@@ -53,6 +53,8 @@ import java.util.*
 class AddUpdateMealActivity : AppCompatActivity() {
     private lateinit var mealBinding: ActivityAddUpdateMealBinding
     private var mImagePath=""
+    private lateinit var mCustomDialog: Dialog
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mealBinding= ActivityAddUpdateMealBinding.inflate(layoutInflater)
@@ -91,11 +93,11 @@ class AddUpdateMealActivity : AppCompatActivity() {
     }
 
     private fun launchDialog(){
-        val custom= Dialog(this)
+        mCustomDialog= Dialog(this)
         val binding: DialogSelectImageBinding = DialogSelectImageBinding.inflate(layoutInflater)
-        custom.setContentView(binding.root)
-        custom.setTitle(R.string.dialog_selectImage)
-        custom.show()
+        mCustomDialog.setContentView(binding.root)
+        mCustomDialog.setTitle(R.string.dialog_selectImage)
+        mCustomDialog.show()
         binding.ivDialogCamera.setOnClickListener{
             //Toast.makeText(this,"Camera clicked", Toast.LENGTH_SHORT).show()
             Dexter.withContext(this).withPermissions(
@@ -124,7 +126,7 @@ class AddUpdateMealActivity : AppCompatActivity() {
 
             }).onSameThread().check()
 
-            custom.dismiss()
+            mCustomDialog.dismiss()
         }
 
         binding.ivDialogGallery.setOnClickListener {
@@ -149,7 +151,7 @@ class AddUpdateMealActivity : AppCompatActivity() {
 
                 }).onSameThread().check()
 
-            custom.dismiss()
+            mCustomDialog.dismiss()
         }
 
     }
@@ -249,15 +251,15 @@ class AddUpdateMealActivity : AppCompatActivity() {
     }
 
     private fun recyclerDialog(title: String, itemsList: List<String>, selection: String){
-        val customDialog= Dialog(this)
+        mCustomDialog= Dialog(this)
         val bindingDialog = DialogCustomListBinding.inflate(layoutInflater)
-        customDialog.setContentView(bindingDialog.root)
+        mCustomDialog.setContentView(bindingDialog.root)
         bindingDialog.tvTitle.text= title
         bindingDialog.rvList.layoutManager= LinearLayoutManager(this)
 
         val adapter= CustomListAdapter(this, itemsList, selection)
         bindingDialog.rvList.adapter= adapter
-        customDialog.show()
+        mCustomDialog.show()
     }
 
     companion object{
