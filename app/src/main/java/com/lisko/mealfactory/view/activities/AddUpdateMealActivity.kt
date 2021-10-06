@@ -15,10 +15,15 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.Settings
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -35,7 +40,10 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.karumi.dexter.listener.single.PermissionListener
 import com.lisko.mealfactory.R
 import com.lisko.mealfactory.databinding.ActivityAddUpdateMealBinding
+import com.lisko.mealfactory.databinding.DialogCustomListBinding
 import com.lisko.mealfactory.databinding.DialogSelectImageBinding
+import com.lisko.mealfactory.utils.Constants
+import com.lisko.mealfactory.view.adapters.CustomListAdapter
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
@@ -51,11 +59,28 @@ class AddUpdateMealActivity : AppCompatActivity() {
         setContentView(mealBinding.root)
 
         setupActionBar()
-
         mealBinding.ivAddPhoto.setOnClickListener {
             launchDialog()
         }
+
+        mealBinding.etType.setOnClickListener {
+            recyclerDialog(resources.getString(R.string.rv_mealtype),
+                Constants.mealTypes(), Constants.MEAL_TYPE)
+        }
+
+        mealBinding.etCategory.setOnClickListener {
+            recyclerDialog(resources.getString(R.string.rv_mealcategory),
+                Constants.mealCategories(), Constants.MEAL_CATEGORY)
+        }
+
+        mealBinding.etTime.setOnClickListener {
+            recyclerDialog(resources.getString(R.string.rv_mealtime),
+                Constants.mealCookTime(), Constants.MEAL_COOKING_TIME)
+        }
+
     }
+
+
 
     private fun setupActionBar() {
         setSupportActionBar(mealBinding.toolbar)
@@ -223,10 +248,24 @@ class AddUpdateMealActivity : AppCompatActivity() {
         return file.absolutePath
     }
 
+    private fun recyclerDialog(title: String, itemsList: List<String>, selection: String){
+        val customDialog= Dialog(this)
+        val bindingDialog = DialogCustomListBinding.inflate(layoutInflater)
+        customDialog.setContentView(bindingDialog.root)
+        bindingDialog.tvTitle.text= title
+        bindingDialog.rvList.layoutManager= LinearLayoutManager(this)
+
+        val adapter= CustomListAdapter(this, itemsList, selection)
+        bindingDialog.rvList.adapter= adapter
+        customDialog.show()
+    }
+
     companion object{
         private const val CAMERA=1
         private const val GALLERY=2
 
         private const val IMAGE_DIRECTORY="MealImages"
     }
+
+
 }

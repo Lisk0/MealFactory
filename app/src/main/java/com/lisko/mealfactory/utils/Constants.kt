@@ -12,10 +12,10 @@ object Constants {
         list.add("snack")
         list.add("dinner")
         list.add("dessert")
-        return list.sorted() as ArrayList<String>
+        return list
     }
 
-    fun dishCategories(): ArrayList<String>{
+    fun mealCategories(): ArrayList<String>{
         val list= ArrayList<String>()
         list.add("BBQ")
         list.add("Bakery")
@@ -25,10 +25,10 @@ object Constants {
         list.add("Drink")
         list.add("Wraps")
 
-        return list.sorted() as ArrayList<String>
+        return list
     }
 
-    fun dishCookTime(): ArrayList<String>{
+    fun mealCookTime(): ArrayList<String>{
         val list= ArrayList<String>()
         list.add("10")
         list.add("15")
@@ -40,6 +40,6 @@ object Constants {
         list.add("90")
         list.add("120")
         list.add("150")
-        return list.sorted() as ArrayList<String>
+        return list
     }
 }

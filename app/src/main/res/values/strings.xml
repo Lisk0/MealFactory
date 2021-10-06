@@ -5,6 +5,7 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="add_meal">Add meal</string>
+    <string name="lb_title">Title</string>
     <string name="lb_type">Type</string>
     <string name="lb_category">Category</string>
     <string name="lb_ingredients">Ingredients</string>
@@ -15,4 +16,7 @@
     <string name="dialog_selectImage">Select an image</string>
     <string name="dialog_camera">Camera</string>
     <string name="dialog_gallery">Gallery</string>
+    <string name="rv_mealcategory">Select meal category</string>
+    <string name="rv_mealtype">Select meal type</string>
+    <string name="rv_mealtime">Select cooking time</string>
 </resources>
