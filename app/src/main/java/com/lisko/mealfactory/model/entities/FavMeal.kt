@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "favmeal_table")
+@Entity(tableName = "favmeal_database")
 data class FavMeal (
     @ColumnInfo val image: String,
     @ColumnInfo val imageSource: String,

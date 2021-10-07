@@ -10,4 +10,5 @@ interface FavMealDao {
     @Insert
     suspend fun insertMeal(favMeal: FavMeal)
 
+
 }
