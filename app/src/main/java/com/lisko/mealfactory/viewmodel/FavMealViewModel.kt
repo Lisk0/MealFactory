@@ -1,8 +1,6 @@
 package com.lisko.mealfactory.viewmodel
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.lisko.mealfactory.model.database.FavMealRepository
 import com.lisko.mealfactory.model.entities.FavMeal
 import kotlinx.coroutines.launch
@@ -12,6 +10,8 @@ class FavMealViewModel(private val repository: FavMealRepository) : ViewModel() 
     fun insert(favMeal: FavMeal)= viewModelScope.launch {
         repository.insertFavMeal(favMeal)
     }
+
+    val allMealData: LiveData<List<FavMeal>> = repository.allMealList.asLiveData()
 
 }
 
