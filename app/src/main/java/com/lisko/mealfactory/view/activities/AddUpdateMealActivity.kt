@@ -18,6 +18,7 @@ import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -40,11 +41,15 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.karumi.dexter.listener.single.PermissionListener
 import com.lisko.mealfactory.R
+import com.lisko.mealfactory.application.FavMealApplication
 import com.lisko.mealfactory.databinding.ActivityAddUpdateMealBinding
 import com.lisko.mealfactory.databinding.DialogCustomListBinding
 import com.lisko.mealfactory.databinding.DialogSelectImageBinding
+import com.lisko.mealfactory.model.entities.FavMeal
 import com.lisko.mealfactory.utils.Constants
 import com.lisko.mealfactory.view.adapters.CustomListAdapter
+import com.lisko.mealfactory.viewmodel.FavMealViewModel
+import com.lisko.mealfactory.viewmodel.FavMealViewModelFactory
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
@@ -55,6 +60,9 @@ class AddUpdateMealActivity : AppCompatActivity() {
     private lateinit var mealBinding: ActivityAddUpdateMealBinding
     private var mImagePath=""
     private lateinit var mCustomDialog: Dialog
+    private val mFavMealViewModel: FavMealViewModel by viewModels {
+        FavMealViewModelFactory((application as FavMealApplication).repository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -115,6 +123,25 @@ class AddUpdateMealActivity : AppCompatActivity() {
         }else if(mealBinding.etSteps.text!!.isEmpty()){
             Toast.makeText(this@AddUpdateMealActivity,
                 resources.getString(R.string.err_steps), Toast.LENGTH_SHORT).show()
+        }
+        else{
+            //entries are valid
+            val favMeal: FavMeal = FavMeal(
+                mImagePath,
+                Constants.MEAL_IMAGE_SOURCE_LOCAL,
+                mealBinding.etTitle.text.toString(),
+                mealBinding.etType.text.toString(),
+                mealBinding.etCategory.text.toString(),
+                mealBinding.etIngredients.text.toString(),
+                mealBinding.etTime.text.toString(),
+                mealBinding.etSteps.text.toString(),
+                false)
+
+            mFavMealViewModel.insert(favMeal)
+            Toast.makeText(this@AddUpdateMealActivity, "Meal added successfully",
+            Toast.LENGTH_SHORT).show()
+            Log.i("Insertion", "Success")
+            finish()
         }
     }
 

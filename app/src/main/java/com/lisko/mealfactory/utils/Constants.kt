@@ -4,6 +4,8 @@ object Constants {
     const val MEAL_TYPE: String= "MealType"
     const val MEAL_CATEGORY: String= "MealCategory"
     const val MEAL_COOKING_TIME: String= "MealCookingTime"
+    const val MEAL_IMAGE_SOURCE_LOCAL: String= "Local"
+    const val MEAL_IMAGE_SOURCE_ONLINE: String= "Online"
 
     fun mealTypes(): ArrayList<String>{
         val list= ArrayList<String>()
