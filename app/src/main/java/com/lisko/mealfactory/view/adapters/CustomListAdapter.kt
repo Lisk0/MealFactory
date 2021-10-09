@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.lisko.mealfactory.databinding.ItemCustomListBinding
+import com.lisko.mealfactory.model.entities.FavMeal
 import com.lisko.mealfactory.view.activities.AddUpdateMealActivity
 
 class CustomListAdapter(private val activity: Activity,

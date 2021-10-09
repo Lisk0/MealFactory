@@ -26,4 +26,5 @@
     <string name="err_ingredients">Please write ingredients for your meal </string>
     <string name="err_time">Please select cooking time </string>
     <string name="err_steps">Please write meal preparation steps </string>
+    <string name="lb_no_items">No items added yet</string>
 </resources>
