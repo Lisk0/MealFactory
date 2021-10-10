@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Meal Factory</string>
     <string name="splash_screen">Meal Factory</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_home">All meals</string>
+    <string name="title_fav_meal">Favorite</string>
+    <string name="title_random_meal">Random</string>
     <string name="add_meal">Add meal</string>
     <string name="lb_title">Title</string>
     <string name="lb_type">Type</string>

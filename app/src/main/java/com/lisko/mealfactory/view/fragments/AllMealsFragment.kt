@@ -4,24 +4,19 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.lisko.mealfactory.R
 import com.lisko.mealfactory.application.FavMealApplication
 import com.lisko.mealfactory.databinding.FragmentAllMealsBinding
 import com.lisko.mealfactory.view.activities.AddUpdateMealActivity
 import com.lisko.mealfactory.view.adapters.FavMealAdapter
-import com.lisko.mealfactory.viewmodel.AllMealsFragment
 import com.lisko.mealfactory.viewmodel.FavMealViewModel
 import com.lisko.mealfactory.viewmodel.FavMealViewModelFactory
 
 class AllMealsFragment : Fragment() {
 
-    private lateinit var allMealsFragment: AllMealsFragment
     private var _binding: FragmentAllMealsBinding? = null
 
     private val mFavMealViewModel: FavMealViewModel by viewModels {
@@ -42,8 +37,6 @@ class AllMealsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        allMealsFragment =
-            ViewModelProvider(this).get(AllMealsFragment::class.java)
 
         _binding = FragmentAllMealsBinding.inflate(inflater, container, false)
         val root: View = binding.root
