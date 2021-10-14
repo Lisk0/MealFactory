@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.lisko.mealfactory.R
 import com.lisko.mealfactory.application.FavMealApplication
@@ -30,6 +31,11 @@ class AllMealsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+    }
+
+    fun dishDetails(ident: Int){
+        findNavController().navigate(AllMealsFragmentDirections
+            .actionNavigationAllMealsToMealDetailsFragment(ident))
     }
 
     override fun onCreateView(
@@ -88,4 +94,5 @@ class AllMealsFragment : Fragment() {
         }
         return super.onOptionsItemSelected(item)
     }
+
 }

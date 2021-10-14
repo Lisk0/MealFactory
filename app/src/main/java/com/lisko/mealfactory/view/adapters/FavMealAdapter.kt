@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.lisko.mealfactory.databinding.ItemCustomListBinding
 import com.lisko.mealfactory.databinding.ItemMealGridBinding
 import com.lisko.mealfactory.model.entities.FavMeal
+import com.lisko.mealfactory.view.fragments.AllMealsFragment
 
 class FavMealAdapter(private val fragment: Fragment ) : RecyclerView.Adapter<FavMealAdapter.ViewHolder>() {
 
@@ -29,6 +30,11 @@ class FavMealAdapter(private val fragment: Fragment ) : RecyclerView.Adapter<Fav
         val meal= mMealList[position]
         Glide.with(fragment).load(meal.image).into(holder.ivMealImageGrid)
         holder.tvDishTitleGrid.text= meal.title
+        holder.itemView.setOnClickListener{
+            if (fragment is AllMealsFragment){
+                fragment.dishDetails(meal.id)
+            }
+        }
     }
 
     override fun getItemCount(): Int {
